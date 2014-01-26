@@ -1,5 +1,0 @@
-initializeNetwork(activationFunction:String, dataMatrix:Matrix[4x3]) returns (weights:Matrix[1x2], bias:Number);
-trainNetwork(numEpochs:uint, learningRate:float[0-1], momentum:float[0-1]) returns (weights:Matrix[1x2], bias:Number);
-testNetwork(input:Matrix[1x2]) returns (output:Number);
-plotOutputSurface();
-plotSwitchFunction();
