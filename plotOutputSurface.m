@@ -4,6 +4,8 @@
 %Neural network instance
 global neuralNetwork;
 
+figure();
+
 step = 0.1;
 
 x = 0:step:1;

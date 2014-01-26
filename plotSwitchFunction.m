@@ -4,6 +4,8 @@
 %Neural network instance
 global neuralNetwork;
 
+figure();
+
 A = - neuralNetwork.IW{1}(1) / neuralNetwork.IW{1}(2);
 B = - neuralNetwork.b{1} / neuralNetwork.IW{1}(2);
 
