@@ -16,8 +16,9 @@ z = zeros(length(x),length(y));
 
 for i = 1:m
     for j = 1:n
-        preZ = neuralNetwork([x(i) y(j)]);
-        z(i,j) = preZ(1);
+        %preZ = neuralNetwork([x(i) y(j)]);
+        %z(i,j) = preZ(1);
+        z(i,j) = testNetwork([x(i) y(j)]);
     end;
 end;
 

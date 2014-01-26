@@ -7,6 +7,10 @@ function [weights, bias] = initializeNetwork(activationFunction, dataMatrix)
 
 %Neural network instance
 global neuralNetwork;
+global theta;
+
+%assign to theta (hard sigmoid parameter), change if you like
+theta = 50;
 
 %Input data (dataMatrix):
 
@@ -22,12 +26,16 @@ if(strcmp(activationFunction, 'purelin')) %Linear function
     neuralNetwork = init(neuralNetwork);
 elseif((strcmp(activationFunction, 'logsig'))||(strcmp(activationFunction,'logsig_hard'))) %sigmoid function
     neuralNetwork = newff(inputMatrix, outputVector);
+    neuralNetwork.trainFcn = 'traingdm';
     neuralNetwork.layers{1}.transferFcn = activationFunction;
     neuralNetwork.outputs{1}.processFcns = {};
     neuralNetwork.inputs{1}.processFcns = {};
     neuralNetwork.divideFcn = '';
     neuralNetwork.trainParam.min_grad = 0;
-    neuralNetwork = init(neuralNetwork);
+    
+    neuralNetwork.IW{1}(1) = rand(1);
+    neuralNetwork.IW{1}(2) = rand(1);
+    neuralNetwork.b{1} = -rand(1);
 else
     err = MException('activationFunction - wrong arguments');
     throw(err);
