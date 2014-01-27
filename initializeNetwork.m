@@ -1,4 +1,4 @@
-function [weights, bias] = initializeNetwork(activationFunction, dataMatrix)
+function [weights, bias] = initializeNetwork(activationFunction, inputMatrix, outputMatrix)
 
 %PROGRAMMER'S NOTE
 %To trully understand the problem one must know, that the BIAS is often
@@ -18,14 +18,11 @@ theta = 50;
 %inputVector2  e f g h;
 %outputVector  i j k l]
 
-inputMatrix = dataMatrix(1:2, 1:4);
-outputVector = dataMatrix(3, 1:4);
-
 if(strcmp(activationFunction, 'purelin')) %Linear function
-    neuralNetwork = newlin(inputMatrix, outputVector);
+    neuralNetwork = newlin(inputMatrix, outputMatrix);
     neuralNetwork = init(neuralNetwork);
 elseif((strcmp(activationFunction, 'logsig'))||(strcmp(activationFunction,'logsig_hard'))) %sigmoid function
-    neuralNetwork = newff(inputMatrix, outputVector);
+    neuralNetwork = newff(inputMatrix, outputMatrix);
     neuralNetwork.trainFcn = 'traingdm';
     neuralNetwork.layers{1}.transferFcn = activationFunction;
     neuralNetwork.outputs{1}.processFcns = {};
