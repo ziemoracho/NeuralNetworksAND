@@ -22,7 +22,7 @@ function varargout = gui(varargin)
 
 % Edit the above text to modify the response to help gui
 
-% Last Modified by GUIDE v2.5 26-Jan-2014 11:39:05
+% Last Modified by GUIDE v2.5 27-Jan-2014 20:51:43
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -85,30 +85,29 @@ plotSwitchFunction();
 
 % --- Executes on button press in initNetworkBtn.
 function initNetworkBtn_Callback(hObject, eventdata, handles)
-dataMatrix = getDataMatrixFromHandle(handles);
+[inputMatrix, outputMatrix] = getDataMatrixFromHandle(handles);
 activFunction = get(get(handles.activFunctionGroup, 'SelectedObject'), 'Tag');
 switch activFunction
     case 'activFunctionRadioLin'
-        [weights, bias] = initializeNetwork('purelin', dataMatrix);
+        [weights, bias] = initializeNetwork('purelin', inputMatrix, outputMatrix);
     case 'activFunctionRadioThr'
-        [weights, bias] = initializeNetwork('logsig_hard', dataMatrix);
+        [weights, bias] = initializeNetwork('logsig_hard', inputMatrix, outputMatrix);
     case 'activFunctionRadioSig'
-        [weights, bias] = initializeNetwork('logsig', dataMatrix);
+        [weights, bias] = initializeNetwork('logsig', inputMatrix, outputMatrix);
 end;
 set(handles.networkWeight1, 'String', roundTo(weights(1), 3));
 set(handles.networkWeight2, 'String', roundTo(weights(2), 3));
 set(handles.networkBias, 'String', roundTo(bias(1), 3));
-handles.dataMatrix = dataMatrix;
 guidata(hObject, handles);
 
 
 % --- Executes on button press in trainNetworkBtn.
 function trainNetworkBtn_Callback(hObject, eventdata, handles)
-dataMatrix = handles.dataMatrix;
+[inputMatrix, outputMatrix] = getDataMatrixFromHandle(handles);
 numEpochs = str2double(get(handles.numEpochs, 'String'));
 learningRate = str2double(get(handles.learningRate, 'String'));
 momentum = str2double(get(handles.momentum, 'String'));
-[weights, bias] = trainNetwork(dataMatrix, numEpochs, learningRate, momentum);
+[weights, bias] = trainNetwork(inputMatrix, outputMatrix, numEpochs, learningRate, momentum);
 set(handles.networkWeight1, 'String', roundTo(weights(1), 4));
 set(handles.networkWeight2, 'String', roundTo(weights(2), 4));
 set(handles.networkBias, 'String', roundTo(bias(1), 4));
@@ -513,3 +512,81 @@ function initInput11_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+
+function additionalOutput_Callback(hObject, eventdata, handles)
+% hObject    handle to additionalOutput (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of additionalOutput as text
+%        str2double(get(hObject,'String')) returns contents of additionalOutput as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function additionalOutput_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to additionalOutput (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function additionalInput2_Callback(hObject, eventdata, handles)
+% hObject    handle to additionalInput2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of additionalInput2 as text
+%        str2double(get(hObject,'String')) returns contents of additionalInput2 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function additionalInput2_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to additionalInput2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function additionalInput1_Callback(hObject, eventdata, handles)
+% hObject    handle to additionalInput1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of additionalInput1 as text
+%        str2double(get(hObject,'String')) returns contents of additionalInput1 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function additionalInput1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to additionalInput1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in additionalInputCheckbox.
+function additionalInputCheckbox_Callback(hObject, eventdata, handles)
+% hObject    handle to additionalInputCheckbox (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of additionalInputCheckbox
