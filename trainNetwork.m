@@ -7,11 +7,6 @@ function [weights, bias] = trainNetwork(inputMatrix, outputMatrix, numEpochs, le
 %Neural network instance
 global neuralNetwork;
 
-%inputVector1 [a b c d;
-%inputVector2  e f g h;
-%outputVector  i j k l]
-
-
 neuralNetwork.trainParam.epochs = numEpochs;
 
 if(strcmp( neuralNetwork.layers{1}.transferFcn, 'purelin') ~= 1)

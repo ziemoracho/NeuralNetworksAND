@@ -12,12 +12,6 @@ global theta;
 %assign to theta (hard sigmoid parameter), change if you like
 theta = 50;
 
-%Input data (dataMatrix):
-
-%inputVector1 [a b c d;
-%inputVector2  e f g h;
-%outputVector  i j k l]
-
 if(strcmp(activationFunction, 'purelin')) %Linear function
     neuralNetwork = newlin(inputMatrix, outputMatrix);
     neuralNetwork = init(neuralNetwork);
